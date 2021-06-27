@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div id="container">
+    <div id="id1"></div>
+    <div class="head"><h1>Welcome To Docker World</h1></div>
+</div>
+<div id="id2">
+    <div id="id3">
+       <p id="para">root@Aditya:~ </p>
+        <input type="text" id="text" placeholder="Enter your Command" name="x" >
+        <button onclick="commands();" id="button">RUN</button>
+    </div>
+    <pre>
+        <div id="id4">OUTPUT --> </div>
+    </pre>
+</div>
+
+
+<script>
+    function commands(a){
+        var i = document.getElementById("text").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET","http://192.168.56.101/cgi-bin/docker.py?x="+i,true);
+        xhr.send();
+        xhr.onload = function()
+        {   
+            var output = xhr.responseText;
+            document.getElementById("id4").innerHTML = output;
+        }
+    }
+    </script>
+    </body>
+    </html>
