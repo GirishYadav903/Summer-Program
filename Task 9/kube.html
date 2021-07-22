@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<head>
+    
+    <!-- <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta http-equiv="Cache-control" content="public">
+    <title> Kubernetes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=2'>
+     -->
+</head>
+<marquee bgcolor="#8FF581B0" loop="" direction="left"
+scrollamount="5" width="100%">Summer Program 2021 LINUX WORLD Task 9 Kubernetes Integration with Python-CGI
+</marquee>
+<!-- style="text-align: center;background-color: #e4ebf1;overflow: hidden" -->
+<body style="background-color: lightsalmon; text-align: center;">
+  <a href="https://kubernetes.io/">
+  <img src="kube.jpeg" width="40" align="left"
+  height="40" border="0">
+  <img src="kube.jpeg" width="40" align="right"
+  height="40" border="0">
+  </a>
+  <br><br><br>
+  <div style="background-color:#CDCDCD;"><font style="font-size: large; font-family: 'Times New Roman'; color:#0d1a55;"><center><h1>KUBERNETES SERVICES</h1></center></font></div>
+    
+    <!-- <div id="h1"><h1  style="color: azure;";>WELCOME TO KUBERNETES WORLD</h1></div> -->
+
+
+<div id="f3">
+   <b style="color:azure;">[root@localhost ~]# </b><input id="input"><br/><br /><button class="run button6" onclick="kube()";>GO</button><br></br>
+   
+</div>
+<textarea style="background-color: transparent;text-align: center; font-size: 20px; border-radius: 0.1in;" name="output" id="tarea" cols="80" rows="12"></textarea><br><br>
+
+<div id="border"><h1 > </h1></div>
+
+
+<script>
+
+	function kube() {
+		
+	  var i = document.getElementById("input").value;
+	  var stat = "0"
+	  var final = ""
+	  if (((i.includes("deployments")) || (i.includes("deploy")) || (i.includes("deployment"))) && ((i.includes("create")) || (i.includes("generate")) || (i.includes("build")))) {
+	        var image = prompt("Enter the name of image: ")
+		var dname = prompt("Enter the name of Deployment: ")
+		var stat = "1"
+		var final = stat + " " + image + " " + dname + " " + i	
+ 		}
+
+	  else if (((i.includes("pods")) || (i.includes("pod"))) && ((i.includes("delete")) || (i.includes("remove")) || (i.includes("detach")))) {
+		var pname = prompt("Enter the name of pod: ")
+		var stat = "3"
+		var final = stat + " " + pname + " " + i		
+		}
+
+	  else if (((i.includes("deployments")) || (i.includes("deploy")) || (i.includes("deployment"))) && ((i.includes("delete")) || (i.includes("remove")) || (i.includes("detach")))) {
+		var dname = prompt("Enter the name of Deployment: ")
+		var stat = "4"
+		var final = stat + " " + dname + " " + i
+		}
+	  
+ 	  else if (((i.includes("services")) || (i.includes("svc"))) && ((i.includes("delete")) || (i.includes("remove")) || (i.includes("detach")))) {
+		var svc = prompt("Enter the name of Service: ")
+		var stat = "5"
+		var final = stat + " " + svc + " " + i
+		}
+
+	  else if (((i.includes("deployments")) || (i.includes("deploy")) || (i.includes("deployment"))) && ((i.includes("expose"))  || (i.includes("display")))) {
+		var dname = prompt("Enter the name of Deployment: ")
+		var port = prompt("Enter the port number where you want to export your deployment: ")
+		var expose_type = prompt(" 1. ClusterIP \n 2.ExternalNames \n 3.LoadBalancer \n 4.NodePort \n Enter the type which you want to export ")
+		var stat = "6"
+		var final = stat + " " + dname + " " + port + " " + expose_type + " " + i
+		}
+
+	  else if (((i.includes("deployments")) || (i.includes("deploy")) || (i.includes("deployment"))) && ((i.includes("scale")) || (i.includes("increase")) || (i.includes("decrease")) || (i.includes("scale up")) || (i.includes("scale down")))) {
+		var dname = prompt("Enter the name of Deployment: ")
+		var replica = prompt("Enter number of replicas: ")
+		var stat = "7"
+		var final = stat + " " + dname + " " + replica + " " + i
+		}
+
+	  else if (((i.includes("pods")) || (i.includes("pod"))) && ((i.includes("show")) || (i.includes("get")) || (i.includes("list")))) {
+		var stat = "8"
+		var final = stat + " " + i
+		
+		}
+
+	  else if (((i.includes("deployments"))|| (i.includes("deployment")) || (i.includes("deploy"))) && ((i.includes("show")) || (i.includes("get")) || (i.includes("list")))) {
+		var stat = "9"
+		var final = stat + " " + i		
+		}
+
+	  else if (((i.includes("service")) || (i.includes("services")) || (i.includes("svc"))) && ((i.includes("show")) || (i.includes("get")) || (i.includes("list")))) {
+		var stat = "10"
+		var final = stat  + " " + i		
+		}
+
+	  else if (((i.includes("all")) || (i.includes("everything"))) && ((i.includes("delete")) ||  (i.includes("destroy")))) {
+		var stat = "11"
+		var final = stat  + " " + i
+		}
+
+	  else {
+		var stat = "12"
+		var final = stat + " " + i
+		}
+
+	  alert(final)
+	
+	  var xhr = new XMLHttpRequest();
+	  xhr.open("GET", "http://192.168.99.101/cgi-bin/kubernetes.py?k="+ final +"&dname="+ dname +"&image="+ image +"&port="+ port +"&expose_type="+ expose_type +"&pname="+ pname +"&replica="+ replica +"&svc=" + svc,true);
+	  xhr.send();	  
+	  xhr.onload = function ()
+		{
+		document.getElementById('tarea').innerHTML = xhr.responseText; 
+		}
+		
+	  
+	}
+
+</script>  
+<ul style="text-align: left;">COMMANDS THAT YOU CAN RUN HERE
+  <li>You can launch pods by giving specific name</li>
+  <li>You can run depoloyment by giving specific name and providing image name</li>
+  <li>You can Expose Services here</li>
+  <li>You can get information about the running pods and deployment as well</li>
+  <li>You can scale the REPLICAs according to your need</li>
+  <li>You can delete complete environment created</li>
+  <li>You can also delete the resources that you provided</li>
+<!--  <li>dsafdafsdfad</li> add wahtever you want in menu-->
+  
+</ul>
+
+<nav>
+  
+    <a href="https://kubernetes.io/">Kubernetes official site</a><br>
+    <a href="https://github.com/Gauravjangid45">My GitHub link</a>
+    <!-- <li><a href="#">Links</a></li> -->
+  
+</nav>
+
+</body>
+</html>
