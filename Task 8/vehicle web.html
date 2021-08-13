@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>INDIA IS GREAT</title>
+    <script>
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();  //object for sending request
+            var cmd1 = document.getElementById("cmd").value;   //fetching id from the search box
+            xhttp.open("GET", "http://192.168.43.28/cgi-bin/new.py?Number=" + cmd1, true);  //url where the request will be sent, asynchronization,GET method
+            xhttp.send();
+            xhttp.onload = function () {
+                // if(xhttp.readyState == 4 && xhttp.status==200){
+                var output = xhttp.responseText;
+                // xhttp.statusText;
+                document.getElementById("tarea").innerHTML = output; // changing the inner output of output box with the content that is recieved via response text
+            }
+        };
+
+    </script>
+</head>
+
+<body
+    style="text-align:center; background-image: url(https://i.pinimg.com/736x/8c/46/31/8c4631e07557575776ac7968066086b0.jpg);background-repeat: no-repeat;background-attachment: fixed; background-size: cover;">
+    <marquee style="font-size: larger; font-family:cursive;color: rgb(255, 251, 0);" loop="infinite" behavior="scroll"
+        direction="right">!! vehicle
+        details vehicle details vehicle details vehicle details vehicle details vehicle details vehicle details vehicle
+        details vehicle details !!</marquee>
+    <h1 style="background-color:darkgrey;">VEHICLE DETAILS IDENTIFIER</h1>
+    <div style="font-size:large;color: cyan;">Enter vehicle number : <input id="cmd" name="search" type="text"></div>
+    <br><br>
+    <button onclick="loadDoc();">submit</button>
+    <br><br>
+
+    <textarea
+        style="background-color: transparent;color: magenta; font-size: 20px; text-align: center; border-radius: 0.1in;"
+        name="output" id="tarea" cols="80" rows="16"></textarea><br><br>
+</body>
+
+</html>
